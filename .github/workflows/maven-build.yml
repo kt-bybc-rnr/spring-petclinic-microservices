@@ -27,3 +27,24 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+
+    - name: ACR login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+
+    - name: Clean install and build Docker image
+      run: ./mvnw clean install -P buildDocker
+
+    - name: Push Docker Image to ACR
+      run: |
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-config-server:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-discovery-server:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-api-gateway:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-visits-service:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-vets-service:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-customers-service:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-admin-server:latest
