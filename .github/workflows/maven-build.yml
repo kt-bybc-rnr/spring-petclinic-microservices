@@ -39,6 +39,17 @@ jobs:
     - name: Clean install and build Docker image
       run: ./mvnw clean install -P buildDocker
 
+    - name: Tag Docker Image
+      run: |
+        docker tag springcommunity/spring-petclinic-api-gateway ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-config-server:latest
+        docker tag springcommunity/spring-petclinic-discovery-server:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-discovery-server:latest
+        docker tag springcommunity/spring-petclinic-api-gateway:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-api-gateway:latest
+        docker tag springcommunity/spring-petclinic-visits-service:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-visits-service:latest
+        docker tag springcommunity/spring-petclinic-vets-service:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-vets-service:latest
+        docker tag springcommunity/spring-petclinic-customers-service:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-customers-service:latest
+        docker tag springcommunity/spring-petclinic-admin-server:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-admin-server:latest
+        
+
     - name: Push Docker Image to ACR
       run: |
         docker push ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-config-server:latest
