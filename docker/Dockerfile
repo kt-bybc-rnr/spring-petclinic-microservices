@@ -44,4 +44,4 @@ RUN true
 COPY --from=builder application/snapshot-dependencies/ ./
 RUN true
 COPY --from=builder application/application/ ./
-ENTRYPOINT ["java", "-javaagent:/opentelemetry-javaagent.jar org.springframework.boot.loader.launch.JarLauncher"]
+ENTRYPOINT ["java", "-javaagent:/application/opentelemetry-javaagent.jar org.springframework.boot.loader.launch.JarLauncher"]
