@@ -10,3 +10,12 @@ spring:
         native:
           searchLocations: file:///${GIT_REPO}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  prometheus:
+    metrics:
+      export:
+        enabled: true
