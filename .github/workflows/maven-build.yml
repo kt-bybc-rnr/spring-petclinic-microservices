@@ -41,7 +41,7 @@ jobs:
 
     - name: Tag Docker Image
       run: |
-        docker tag springcommunity/spring-petclinic-api-gateway ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-config-server:latest
+        docker tag springcommunity/spring-petclinic-config-server ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-config-server:latest
         docker tag springcommunity/spring-petclinic-discovery-server:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-discovery-server:latest
         docker tag springcommunity/spring-petclinic-api-gateway:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-api-gateway:latest
         docker tag springcommunity/spring-petclinic-visits-service:latest ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic-visits-service:latest
